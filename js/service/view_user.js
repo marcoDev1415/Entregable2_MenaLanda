@@ -2,10 +2,19 @@ const datos = localStorage.getItem("usuarios");
 
 
 export function view_user(datos) {
-  if (!datos) return;
+  const contenedor = document.getElementById("tabla-usuarios");
+  if (!contenedor) return;
+
+  if (!datos) {
+    contenedor.innerHTML = '<p class="text-center text-gray-500">No hay usuarios registrados.</p>';
+    return;
+  }
 
   const usuarios = JSON.parse(datos);
-  const contenedor = document.getElementById("tabla-usuarios");
+  if (!usuarios || usuarios.length === 0) {
+    contenedor.innerHTML = '<p class="text-center text-gray-500">No hay usuarios registrados.</p>';
+    return;
+  }
 
   let html = `
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
